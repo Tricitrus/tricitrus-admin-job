@@ -264,8 +264,8 @@ func (c *TaskClient) Update() *TaskUpdate {
 }
 
 // UpdateOne returns an update builder for the given entity.
-func (c *TaskClient) UpdateOne(t *Task) *TaskUpdateOne {
-	mutation := newTaskMutation(c.config, OpUpdateOne, withTask(t))
+func (c *TaskClient) UpdateOne(_m *Task) *TaskUpdateOne {
+	mutation := newTaskMutation(c.config, OpUpdateOne, withTask(_m))
 	return &TaskUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
@@ -282,8 +282,8 @@ func (c *TaskClient) Delete() *TaskDelete {
 }
 
 // DeleteOne returns a builder for deleting the given entity.
-func (c *TaskClient) DeleteOne(t *Task) *TaskDeleteOne {
-	return c.DeleteOneID(t.ID)
+func (c *TaskClient) DeleteOne(_m *Task) *TaskDeleteOne {
+	return c.DeleteOneID(_m.ID)
 }
 
 // DeleteOneID returns a builder for deleting the given entity by its id.
@@ -318,16 +318,16 @@ func (c *TaskClient) GetX(ctx context.Context, id uint64) *Task {
 }
 
 // QueryTaskLogs queries the task_logs edge of a Task.
-func (c *TaskClient) QueryTaskLogs(t *Task) *TaskLogQuery {
+func (c *TaskClient) QueryTaskLogs(_m *Task) *TaskLogQuery {
 	query := (&TaskLogClient{config: c.config}).Query()
 	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
-		id := t.ID
+		id := _m.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(task.Table, task.FieldID, id),
 			sqlgraph.To(tasklog.Table, tasklog.FieldID),
 			sqlgraph.Edge(sqlgraph.O2M, false, task.TaskLogsTable, task.TaskLogsColumn),
 		)
-		fromV = sqlgraph.Neighbors(t.driver.Dialect(), step)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
 		return fromV, nil
 	}
 	return query
@@ -413,8 +413,8 @@ func (c *TaskLogClient) Update() *TaskLogUpdate {
 }
 
 // UpdateOne returns an update builder for the given entity.
-func (c *TaskLogClient) UpdateOne(tl *TaskLog) *TaskLogUpdateOne {
-	mutation := newTaskLogMutation(c.config, OpUpdateOne, withTaskLog(tl))
+func (c *TaskLogClient) UpdateOne(_m *TaskLog) *TaskLogUpdateOne {
+	mutation := newTaskLogMutation(c.config, OpUpdateOne, withTaskLog(_m))
 	return &TaskLogUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
 }
 
@@ -431,8 +431,8 @@ func (c *TaskLogClient) Delete() *TaskLogDelete {
 }
 
 // DeleteOne returns a builder for deleting the given entity.
-func (c *TaskLogClient) DeleteOne(tl *TaskLog) *TaskLogDeleteOne {
-	return c.DeleteOneID(tl.ID)
+func (c *TaskLogClient) DeleteOne(_m *TaskLog) *TaskLogDeleteOne {
+	return c.DeleteOneID(_m.ID)
 }
 
 // DeleteOneID returns a builder for deleting the given entity by its id.
@@ -467,16 +467,16 @@ func (c *TaskLogClient) GetX(ctx context.Context, id uint64) *TaskLog {
 }
 
 // QueryTasks queries the tasks edge of a TaskLog.
-func (c *TaskLogClient) QueryTasks(tl *TaskLog) *TaskQuery {
+func (c *TaskLogClient) QueryTasks(_m *TaskLog) *TaskQuery {
 	query := (&TaskClient{config: c.config}).Query()
 	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
-		id := tl.ID
+		id := _m.ID
 		step := sqlgraph.NewStep(
 			sqlgraph.From(tasklog.Table, tasklog.FieldID, id),
 			sqlgraph.To(task.Table, task.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, tasklog.TasksTable, tasklog.TasksColumn),
 		)
-		fromV = sqlgraph.Neighbors(tl.driver.Dialect(), step)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
 		return fromV, nil
 	}
 	return query

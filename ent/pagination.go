@@ -91,7 +91,7 @@ type TaskPageList struct {
 	PageDetails *PageDetails `json:"pageDetails"`
 }
 
-func (t *TaskQuery) Page(
+func (_m *TaskQuery) Page(
 	ctx context.Context, pageNum uint64, pageSize uint64, opts ...TaskPaginateOption,
 ) (*TaskPageList, error) {
 
@@ -100,7 +100,7 @@ func (t *TaskQuery) Page(
 		return nil, err
 	}
 
-	if t, err = pager.ApplyFilter(t); err != nil {
+	if _m, err = pager.ApplyFilter(_m); err != nil {
 		return nil, err
 	}
 
@@ -111,7 +111,7 @@ func (t *TaskQuery) Page(
 		Size: pageSize,
 	}
 
-	query := t.Clone()
+	query := _m.Clone()
 	query.ctx.Fields = nil
 	count, err := query.Count(ctx)
 
@@ -122,13 +122,13 @@ func (t *TaskQuery) Page(
 	ret.PageDetails.Total = uint64(count)
 
 	if pager.Order != nil {
-		t = t.Order(pager.Order)
+		_m = _m.Order(pager.Order)
 	} else {
-		t = t.Order(DefaultTaskOrder)
+		_m = _m.Order(DefaultTaskOrder)
 	}
 
-	t = t.Offset(int((pageNum - 1) * pageSize)).Limit(int(pageSize))
-	list, err := t.All(ctx)
+	_m = _m.Offset(int((pageNum - 1) * pageSize)).Limit(int(pageSize))
+	list, err := _m.All(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -172,7 +172,7 @@ type TaskLogPageList struct {
 	PageDetails *PageDetails `json:"pageDetails"`
 }
 
-func (tl *TaskLogQuery) Page(
+func (_m *TaskLogQuery) Page(
 	ctx context.Context, pageNum uint64, pageSize uint64, opts ...TaskLogPaginateOption,
 ) (*TaskLogPageList, error) {
 
@@ -181,7 +181,7 @@ func (tl *TaskLogQuery) Page(
 		return nil, err
 	}
 
-	if tl, err = pager.ApplyFilter(tl); err != nil {
+	if _m, err = pager.ApplyFilter(_m); err != nil {
 		return nil, err
 	}
 
@@ -192,7 +192,7 @@ func (tl *TaskLogQuery) Page(
 		Size: pageSize,
 	}
 
-	query := tl.Clone()
+	query := _m.Clone()
 	query.ctx.Fields = nil
 	count, err := query.Count(ctx)
 
@@ -203,13 +203,13 @@ func (tl *TaskLogQuery) Page(
 	ret.PageDetails.Total = uint64(count)
 
 	if pager.Order != nil {
-		tl = tl.Order(pager.Order)
+		_m = _m.Order(pager.Order)
 	} else {
-		tl = tl.Order(DefaultTaskLogOrder)
+		_m = _m.Order(DefaultTaskLogOrder)
 	}
 
-	tl = tl.Offset(int((pageNum - 1) * pageSize)).Limit(int(pageSize))
-	list, err := tl.All(ctx)
+	_m = _m.Offset(int((pageNum - 1) * pageSize)).Limit(int(pageSize))
+	list, err := _m.All(ctx)
 	if err != nil {
 		return nil, err
 	}

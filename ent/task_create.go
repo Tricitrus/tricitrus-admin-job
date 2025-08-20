@@ -22,112 +22,112 @@ type TaskCreate struct {
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (tc *TaskCreate) SetCreatedAt(t time.Time) *TaskCreate {
-	tc.mutation.SetCreatedAt(t)
-	return tc
+func (_c *TaskCreate) SetCreatedAt(v time.Time) *TaskCreate {
+	_c.mutation.SetCreatedAt(v)
+	return _c
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (tc *TaskCreate) SetNillableCreatedAt(t *time.Time) *TaskCreate {
-	if t != nil {
-		tc.SetCreatedAt(*t)
+func (_c *TaskCreate) SetNillableCreatedAt(v *time.Time) *TaskCreate {
+	if v != nil {
+		_c.SetCreatedAt(*v)
 	}
-	return tc
+	return _c
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (tc *TaskCreate) SetUpdatedAt(t time.Time) *TaskCreate {
-	tc.mutation.SetUpdatedAt(t)
-	return tc
+func (_c *TaskCreate) SetUpdatedAt(v time.Time) *TaskCreate {
+	_c.mutation.SetUpdatedAt(v)
+	return _c
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (tc *TaskCreate) SetNillableUpdatedAt(t *time.Time) *TaskCreate {
-	if t != nil {
-		tc.SetUpdatedAt(*t)
+func (_c *TaskCreate) SetNillableUpdatedAt(v *time.Time) *TaskCreate {
+	if v != nil {
+		_c.SetUpdatedAt(*v)
 	}
-	return tc
+	return _c
 }
 
 // SetStatus sets the "status" field.
-func (tc *TaskCreate) SetStatus(u uint8) *TaskCreate {
-	tc.mutation.SetStatus(u)
-	return tc
+func (_c *TaskCreate) SetStatus(v uint8) *TaskCreate {
+	_c.mutation.SetStatus(v)
+	return _c
 }
 
 // SetNillableStatus sets the "status" field if the given value is not nil.
-func (tc *TaskCreate) SetNillableStatus(u *uint8) *TaskCreate {
-	if u != nil {
-		tc.SetStatus(*u)
+func (_c *TaskCreate) SetNillableStatus(v *uint8) *TaskCreate {
+	if v != nil {
+		_c.SetStatus(*v)
 	}
-	return tc
+	return _c
 }
 
 // SetName sets the "name" field.
-func (tc *TaskCreate) SetName(s string) *TaskCreate {
-	tc.mutation.SetName(s)
-	return tc
+func (_c *TaskCreate) SetName(v string) *TaskCreate {
+	_c.mutation.SetName(v)
+	return _c
 }
 
 // SetTaskGroup sets the "task_group" field.
-func (tc *TaskCreate) SetTaskGroup(s string) *TaskCreate {
-	tc.mutation.SetTaskGroup(s)
-	return tc
+func (_c *TaskCreate) SetTaskGroup(v string) *TaskCreate {
+	_c.mutation.SetTaskGroup(v)
+	return _c
 }
 
 // SetCronExpression sets the "cron_expression" field.
-func (tc *TaskCreate) SetCronExpression(s string) *TaskCreate {
-	tc.mutation.SetCronExpression(s)
-	return tc
+func (_c *TaskCreate) SetCronExpression(v string) *TaskCreate {
+	_c.mutation.SetCronExpression(v)
+	return _c
 }
 
 // SetPattern sets the "pattern" field.
-func (tc *TaskCreate) SetPattern(s string) *TaskCreate {
-	tc.mutation.SetPattern(s)
-	return tc
+func (_c *TaskCreate) SetPattern(v string) *TaskCreate {
+	_c.mutation.SetPattern(v)
+	return _c
 }
 
 // SetPayload sets the "payload" field.
-func (tc *TaskCreate) SetPayload(s string) *TaskCreate {
-	tc.mutation.SetPayload(s)
-	return tc
+func (_c *TaskCreate) SetPayload(v string) *TaskCreate {
+	_c.mutation.SetPayload(v)
+	return _c
 }
 
 // SetID sets the "id" field.
-func (tc *TaskCreate) SetID(u uint64) *TaskCreate {
-	tc.mutation.SetID(u)
-	return tc
+func (_c *TaskCreate) SetID(v uint64) *TaskCreate {
+	_c.mutation.SetID(v)
+	return _c
 }
 
 // AddTaskLogIDs adds the "task_logs" edge to the TaskLog entity by IDs.
-func (tc *TaskCreate) AddTaskLogIDs(ids ...uint64) *TaskCreate {
-	tc.mutation.AddTaskLogIDs(ids...)
-	return tc
+func (_c *TaskCreate) AddTaskLogIDs(ids ...uint64) *TaskCreate {
+	_c.mutation.AddTaskLogIDs(ids...)
+	return _c
 }
 
 // AddTaskLogs adds the "task_logs" edges to the TaskLog entity.
-func (tc *TaskCreate) AddTaskLogs(t ...*TaskLog) *TaskCreate {
-	ids := make([]uint64, len(t))
-	for i := range t {
-		ids[i] = t[i].ID
+func (_c *TaskCreate) AddTaskLogs(v ...*TaskLog) *TaskCreate {
+	ids := make([]uint64, len(v))
+	for i := range v {
+		ids[i] = v[i].ID
 	}
-	return tc.AddTaskLogIDs(ids...)
+	return _c.AddTaskLogIDs(ids...)
 }
 
 // Mutation returns the TaskMutation object of the builder.
-func (tc *TaskCreate) Mutation() *TaskMutation {
-	return tc.mutation
+func (_c *TaskCreate) Mutation() *TaskMutation {
+	return _c.mutation
 }
 
 // Save creates the Task in the database.
-func (tc *TaskCreate) Save(ctx context.Context) (*Task, error) {
-	tc.defaults()
-	return withHooks(ctx, tc.sqlSave, tc.mutation, tc.hooks)
+func (_c *TaskCreate) Save(ctx context.Context) (*Task, error) {
+	_c.defaults()
+	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (tc *TaskCreate) SaveX(ctx context.Context) *Task {
-	v, err := tc.Save(ctx)
+func (_c *TaskCreate) SaveX(ctx context.Context) *Task {
+	v, err := _c.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -135,66 +135,66 @@ func (tc *TaskCreate) SaveX(ctx context.Context) *Task {
 }
 
 // Exec executes the query.
-func (tc *TaskCreate) Exec(ctx context.Context) error {
-	_, err := tc.Save(ctx)
+func (_c *TaskCreate) Exec(ctx context.Context) error {
+	_, err := _c.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (tc *TaskCreate) ExecX(ctx context.Context) {
-	if err := tc.Exec(ctx); err != nil {
+func (_c *TaskCreate) ExecX(ctx context.Context) {
+	if err := _c.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (tc *TaskCreate) defaults() {
-	if _, ok := tc.mutation.CreatedAt(); !ok {
+func (_c *TaskCreate) defaults() {
+	if _, ok := _c.mutation.CreatedAt(); !ok {
 		v := task.DefaultCreatedAt()
-		tc.mutation.SetCreatedAt(v)
+		_c.mutation.SetCreatedAt(v)
 	}
-	if _, ok := tc.mutation.UpdatedAt(); !ok {
+	if _, ok := _c.mutation.UpdatedAt(); !ok {
 		v := task.DefaultUpdatedAt()
-		tc.mutation.SetUpdatedAt(v)
+		_c.mutation.SetUpdatedAt(v)
 	}
-	if _, ok := tc.mutation.Status(); !ok {
+	if _, ok := _c.mutation.Status(); !ok {
 		v := task.DefaultStatus
-		tc.mutation.SetStatus(v)
+		_c.mutation.SetStatus(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (tc *TaskCreate) check() error {
-	if _, ok := tc.mutation.CreatedAt(); !ok {
+func (_c *TaskCreate) check() error {
+	if _, ok := _c.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "Task.created_at"`)}
 	}
-	if _, ok := tc.mutation.UpdatedAt(); !ok {
+	if _, ok := _c.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "Task.updated_at"`)}
 	}
-	if _, ok := tc.mutation.Name(); !ok {
+	if _, ok := _c.mutation.Name(); !ok {
 		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "Task.name"`)}
 	}
-	if _, ok := tc.mutation.TaskGroup(); !ok {
+	if _, ok := _c.mutation.TaskGroup(); !ok {
 		return &ValidationError{Name: "task_group", err: errors.New(`ent: missing required field "Task.task_group"`)}
 	}
-	if _, ok := tc.mutation.CronExpression(); !ok {
+	if _, ok := _c.mutation.CronExpression(); !ok {
 		return &ValidationError{Name: "cron_expression", err: errors.New(`ent: missing required field "Task.cron_expression"`)}
 	}
-	if _, ok := tc.mutation.Pattern(); !ok {
+	if _, ok := _c.mutation.Pattern(); !ok {
 		return &ValidationError{Name: "pattern", err: errors.New(`ent: missing required field "Task.pattern"`)}
 	}
-	if _, ok := tc.mutation.Payload(); !ok {
+	if _, ok := _c.mutation.Payload(); !ok {
 		return &ValidationError{Name: "payload", err: errors.New(`ent: missing required field "Task.payload"`)}
 	}
 	return nil
 }
 
-func (tc *TaskCreate) sqlSave(ctx context.Context) (*Task, error) {
-	if err := tc.check(); err != nil {
+func (_c *TaskCreate) sqlSave(ctx context.Context) (*Task, error) {
+	if err := _c.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := tc.createSpec()
-	if err := sqlgraph.CreateNode(ctx, tc.driver, _spec); err != nil {
+	_node, _spec := _c.createSpec()
+	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -204,53 +204,53 @@ func (tc *TaskCreate) sqlSave(ctx context.Context) (*Task, error) {
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint64(id)
 	}
-	tc.mutation.id = &_node.ID
-	tc.mutation.done = true
+	_c.mutation.id = &_node.ID
+	_c.mutation.done = true
 	return _node, nil
 }
 
-func (tc *TaskCreate) createSpec() (*Task, *sqlgraph.CreateSpec) {
+func (_c *TaskCreate) createSpec() (*Task, *sqlgraph.CreateSpec) {
 	var (
-		_node = &Task{config: tc.config}
+		_node = &Task{config: _c.config}
 		_spec = sqlgraph.NewCreateSpec(task.Table, sqlgraph.NewFieldSpec(task.FieldID, field.TypeUint64))
 	)
-	if id, ok := tc.mutation.ID(); ok {
+	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := tc.mutation.CreatedAt(); ok {
+	if value, ok := _c.mutation.CreatedAt(); ok {
 		_spec.SetField(task.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := tc.mutation.UpdatedAt(); ok {
+	if value, ok := _c.mutation.UpdatedAt(); ok {
 		_spec.SetField(task.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := tc.mutation.Status(); ok {
+	if value, ok := _c.mutation.Status(); ok {
 		_spec.SetField(task.FieldStatus, field.TypeUint8, value)
 		_node.Status = value
 	}
-	if value, ok := tc.mutation.Name(); ok {
+	if value, ok := _c.mutation.Name(); ok {
 		_spec.SetField(task.FieldName, field.TypeString, value)
 		_node.Name = value
 	}
-	if value, ok := tc.mutation.TaskGroup(); ok {
+	if value, ok := _c.mutation.TaskGroup(); ok {
 		_spec.SetField(task.FieldTaskGroup, field.TypeString, value)
 		_node.TaskGroup = value
 	}
-	if value, ok := tc.mutation.CronExpression(); ok {
+	if value, ok := _c.mutation.CronExpression(); ok {
 		_spec.SetField(task.FieldCronExpression, field.TypeString, value)
 		_node.CronExpression = value
 	}
-	if value, ok := tc.mutation.Pattern(); ok {
+	if value, ok := _c.mutation.Pattern(); ok {
 		_spec.SetField(task.FieldPattern, field.TypeString, value)
 		_node.Pattern = value
 	}
-	if value, ok := tc.mutation.Payload(); ok {
+	if value, ok := _c.mutation.Payload(); ok {
 		_spec.SetField(task.FieldPayload, field.TypeString, value)
 		_node.Payload = value
 	}
-	if nodes := tc.mutation.TaskLogsIDs(); len(nodes) > 0 {
+	if nodes := _c.mutation.TaskLogsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -277,16 +277,16 @@ type TaskCreateBulk struct {
 }
 
 // Save creates the Task entities in the database.
-func (tcb *TaskCreateBulk) Save(ctx context.Context) ([]*Task, error) {
-	if tcb.err != nil {
-		return nil, tcb.err
+func (_c *TaskCreateBulk) Save(ctx context.Context) ([]*Task, error) {
+	if _c.err != nil {
+		return nil, _c.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(tcb.builders))
-	nodes := make([]*Task, len(tcb.builders))
-	mutators := make([]Mutator, len(tcb.builders))
-	for i := range tcb.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
+	nodes := make([]*Task, len(_c.builders))
+	mutators := make([]Mutator, len(_c.builders))
+	for i := range _c.builders {
 		func(i int, root context.Context) {
-			builder := tcb.builders[i]
+			builder := _c.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*TaskMutation)
@@ -300,11 +300,11 @@ func (tcb *TaskCreateBulk) Save(ctx context.Context) ([]*Task, error) {
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, tcb.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, tcb.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -328,7 +328,7 @@ func (tcb *TaskCreateBulk) Save(ctx context.Context) ([]*Task, error) {
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, tcb.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -336,8 +336,8 @@ func (tcb *TaskCreateBulk) Save(ctx context.Context) ([]*Task, error) {
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (tcb *TaskCreateBulk) SaveX(ctx context.Context) []*Task {
-	v, err := tcb.Save(ctx)
+func (_c *TaskCreateBulk) SaveX(ctx context.Context) []*Task {
+	v, err := _c.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -345,14 +345,14 @@ func (tcb *TaskCreateBulk) SaveX(ctx context.Context) []*Task {
 }
 
 // Exec executes the query.
-func (tcb *TaskCreateBulk) Exec(ctx context.Context) error {
-	_, err := tcb.Save(ctx)
+func (_c *TaskCreateBulk) Exec(ctx context.Context) error {
+	_, err := _c.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (tcb *TaskCreateBulk) ExecX(ctx context.Context) {
-	if err := tcb.Exec(ctx); err != nil {
+func (_c *TaskCreateBulk) ExecX(ctx context.Context) {
+	if err := _c.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
