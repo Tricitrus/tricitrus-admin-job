@@ -24,84 +24,84 @@ type TaskLogUpdate struct {
 }
 
 // Where appends a list predicates to the TaskLogUpdate builder.
-func (tlu *TaskLogUpdate) Where(ps ...predicate.TaskLog) *TaskLogUpdate {
-	tlu.mutation.Where(ps...)
-	return tlu
+func (_u *TaskLogUpdate) Where(ps ...predicate.TaskLog) *TaskLogUpdate {
+	_u.mutation.Where(ps...)
+	return _u
 }
 
 // SetFinishedAt sets the "finished_at" field.
-func (tlu *TaskLogUpdate) SetFinishedAt(t time.Time) *TaskLogUpdate {
-	tlu.mutation.SetFinishedAt(t)
-	return tlu
+func (_u *TaskLogUpdate) SetFinishedAt(v time.Time) *TaskLogUpdate {
+	_u.mutation.SetFinishedAt(v)
+	return _u
 }
 
 // SetNillableFinishedAt sets the "finished_at" field if the given value is not nil.
-func (tlu *TaskLogUpdate) SetNillableFinishedAt(t *time.Time) *TaskLogUpdate {
-	if t != nil {
-		tlu.SetFinishedAt(*t)
+func (_u *TaskLogUpdate) SetNillableFinishedAt(v *time.Time) *TaskLogUpdate {
+	if v != nil {
+		_u.SetFinishedAt(*v)
 	}
-	return tlu
+	return _u
 }
 
 // SetResult sets the "result" field.
-func (tlu *TaskLogUpdate) SetResult(u uint8) *TaskLogUpdate {
-	tlu.mutation.ResetResult()
-	tlu.mutation.SetResult(u)
-	return tlu
+func (_u *TaskLogUpdate) SetResult(v uint8) *TaskLogUpdate {
+	_u.mutation.ResetResult()
+	_u.mutation.SetResult(v)
+	return _u
 }
 
 // SetNillableResult sets the "result" field if the given value is not nil.
-func (tlu *TaskLogUpdate) SetNillableResult(u *uint8) *TaskLogUpdate {
-	if u != nil {
-		tlu.SetResult(*u)
+func (_u *TaskLogUpdate) SetNillableResult(v *uint8) *TaskLogUpdate {
+	if v != nil {
+		_u.SetResult(*v)
 	}
-	return tlu
+	return _u
 }
 
-// AddResult adds u to the "result" field.
-func (tlu *TaskLogUpdate) AddResult(u int8) *TaskLogUpdate {
-	tlu.mutation.AddResult(u)
-	return tlu
+// AddResult adds value to the "result" field.
+func (_u *TaskLogUpdate) AddResult(v int8) *TaskLogUpdate {
+	_u.mutation.AddResult(v)
+	return _u
 }
 
 // SetTasksID sets the "tasks" edge to the Task entity by ID.
-func (tlu *TaskLogUpdate) SetTasksID(id uint64) *TaskLogUpdate {
-	tlu.mutation.SetTasksID(id)
-	return tlu
+func (_u *TaskLogUpdate) SetTasksID(id uint64) *TaskLogUpdate {
+	_u.mutation.SetTasksID(id)
+	return _u
 }
 
 // SetNillableTasksID sets the "tasks" edge to the Task entity by ID if the given value is not nil.
-func (tlu *TaskLogUpdate) SetNillableTasksID(id *uint64) *TaskLogUpdate {
+func (_u *TaskLogUpdate) SetNillableTasksID(id *uint64) *TaskLogUpdate {
 	if id != nil {
-		tlu = tlu.SetTasksID(*id)
+		_u = _u.SetTasksID(*id)
 	}
-	return tlu
+	return _u
 }
 
 // SetTasks sets the "tasks" edge to the Task entity.
-func (tlu *TaskLogUpdate) SetTasks(t *Task) *TaskLogUpdate {
-	return tlu.SetTasksID(t.ID)
+func (_u *TaskLogUpdate) SetTasks(v *Task) *TaskLogUpdate {
+	return _u.SetTasksID(v.ID)
 }
 
 // Mutation returns the TaskLogMutation object of the builder.
-func (tlu *TaskLogUpdate) Mutation() *TaskLogMutation {
-	return tlu.mutation
+func (_u *TaskLogUpdate) Mutation() *TaskLogMutation {
+	return _u.mutation
 }
 
 // ClearTasks clears the "tasks" edge to the Task entity.
-func (tlu *TaskLogUpdate) ClearTasks() *TaskLogUpdate {
-	tlu.mutation.ClearTasks()
-	return tlu
+func (_u *TaskLogUpdate) ClearTasks() *TaskLogUpdate {
+	_u.mutation.ClearTasks()
+	return _u
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (tlu *TaskLogUpdate) Save(ctx context.Context) (int, error) {
-	return withHooks(ctx, tlu.sqlSave, tlu.mutation, tlu.hooks)
+func (_u *TaskLogUpdate) Save(ctx context.Context) (int, error) {
+	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (tlu *TaskLogUpdate) SaveX(ctx context.Context) int {
-	affected, err := tlu.Save(ctx)
+func (_u *TaskLogUpdate) SaveX(ctx context.Context) int {
+	affected, err := _u.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -109,37 +109,37 @@ func (tlu *TaskLogUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (tlu *TaskLogUpdate) Exec(ctx context.Context) error {
-	_, err := tlu.Save(ctx)
+func (_u *TaskLogUpdate) Exec(ctx context.Context) error {
+	_, err := _u.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (tlu *TaskLogUpdate) ExecX(ctx context.Context) {
-	if err := tlu.Exec(ctx); err != nil {
+func (_u *TaskLogUpdate) ExecX(ctx context.Context) {
+	if err := _u.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
-func (tlu *TaskLogUpdate) sqlSave(ctx context.Context) (n int, err error) {
+func (_u *TaskLogUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 	_spec := sqlgraph.NewUpdateSpec(tasklog.Table, tasklog.Columns, sqlgraph.NewFieldSpec(tasklog.FieldID, field.TypeUint64))
-	if ps := tlu.mutation.predicates; len(ps) > 0 {
+	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := tlu.mutation.FinishedAt(); ok {
+	if value, ok := _u.mutation.FinishedAt(); ok {
 		_spec.SetField(tasklog.FieldFinishedAt, field.TypeTime, value)
 	}
-	if value, ok := tlu.mutation.Result(); ok {
+	if value, ok := _u.mutation.Result(); ok {
 		_spec.SetField(tasklog.FieldResult, field.TypeUint8, value)
 	}
-	if value, ok := tlu.mutation.AddedResult(); ok {
+	if value, ok := _u.mutation.AddedResult(); ok {
 		_spec.AddField(tasklog.FieldResult, field.TypeUint8, value)
 	}
-	if tlu.mutation.TasksCleared() {
+	if _u.mutation.TasksCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -152,7 +152,7 @@ func (tlu *TaskLogUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := tlu.mutation.TasksIDs(); len(nodes) > 0 {
+	if nodes := _u.mutation.TasksIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -168,7 +168,7 @@ func (tlu *TaskLogUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if n, err = sqlgraph.UpdateNodes(ctx, tlu.driver, _spec); err != nil {
+	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{tasklog.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -176,8 +176,8 @@ func (tlu *TaskLogUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		}
 		return 0, err
 	}
-	tlu.mutation.done = true
-	return n, nil
+	_u.mutation.done = true
+	return _node, nil
 }
 
 // TaskLogUpdateOne is the builder for updating a single TaskLog entity.
@@ -189,91 +189,91 @@ type TaskLogUpdateOne struct {
 }
 
 // SetFinishedAt sets the "finished_at" field.
-func (tluo *TaskLogUpdateOne) SetFinishedAt(t time.Time) *TaskLogUpdateOne {
-	tluo.mutation.SetFinishedAt(t)
-	return tluo
+func (_u *TaskLogUpdateOne) SetFinishedAt(v time.Time) *TaskLogUpdateOne {
+	_u.mutation.SetFinishedAt(v)
+	return _u
 }
 
 // SetNillableFinishedAt sets the "finished_at" field if the given value is not nil.
-func (tluo *TaskLogUpdateOne) SetNillableFinishedAt(t *time.Time) *TaskLogUpdateOne {
-	if t != nil {
-		tluo.SetFinishedAt(*t)
+func (_u *TaskLogUpdateOne) SetNillableFinishedAt(v *time.Time) *TaskLogUpdateOne {
+	if v != nil {
+		_u.SetFinishedAt(*v)
 	}
-	return tluo
+	return _u
 }
 
 // SetResult sets the "result" field.
-func (tluo *TaskLogUpdateOne) SetResult(u uint8) *TaskLogUpdateOne {
-	tluo.mutation.ResetResult()
-	tluo.mutation.SetResult(u)
-	return tluo
+func (_u *TaskLogUpdateOne) SetResult(v uint8) *TaskLogUpdateOne {
+	_u.mutation.ResetResult()
+	_u.mutation.SetResult(v)
+	return _u
 }
 
 // SetNillableResult sets the "result" field if the given value is not nil.
-func (tluo *TaskLogUpdateOne) SetNillableResult(u *uint8) *TaskLogUpdateOne {
-	if u != nil {
-		tluo.SetResult(*u)
+func (_u *TaskLogUpdateOne) SetNillableResult(v *uint8) *TaskLogUpdateOne {
+	if v != nil {
+		_u.SetResult(*v)
 	}
-	return tluo
+	return _u
 }
 
-// AddResult adds u to the "result" field.
-func (tluo *TaskLogUpdateOne) AddResult(u int8) *TaskLogUpdateOne {
-	tluo.mutation.AddResult(u)
-	return tluo
+// AddResult adds value to the "result" field.
+func (_u *TaskLogUpdateOne) AddResult(v int8) *TaskLogUpdateOne {
+	_u.mutation.AddResult(v)
+	return _u
 }
 
 // SetTasksID sets the "tasks" edge to the Task entity by ID.
-func (tluo *TaskLogUpdateOne) SetTasksID(id uint64) *TaskLogUpdateOne {
-	tluo.mutation.SetTasksID(id)
-	return tluo
+func (_u *TaskLogUpdateOne) SetTasksID(id uint64) *TaskLogUpdateOne {
+	_u.mutation.SetTasksID(id)
+	return _u
 }
 
 // SetNillableTasksID sets the "tasks" edge to the Task entity by ID if the given value is not nil.
-func (tluo *TaskLogUpdateOne) SetNillableTasksID(id *uint64) *TaskLogUpdateOne {
+func (_u *TaskLogUpdateOne) SetNillableTasksID(id *uint64) *TaskLogUpdateOne {
 	if id != nil {
-		tluo = tluo.SetTasksID(*id)
+		_u = _u.SetTasksID(*id)
 	}
-	return tluo
+	return _u
 }
 
 // SetTasks sets the "tasks" edge to the Task entity.
-func (tluo *TaskLogUpdateOne) SetTasks(t *Task) *TaskLogUpdateOne {
-	return tluo.SetTasksID(t.ID)
+func (_u *TaskLogUpdateOne) SetTasks(v *Task) *TaskLogUpdateOne {
+	return _u.SetTasksID(v.ID)
 }
 
 // Mutation returns the TaskLogMutation object of the builder.
-func (tluo *TaskLogUpdateOne) Mutation() *TaskLogMutation {
-	return tluo.mutation
+func (_u *TaskLogUpdateOne) Mutation() *TaskLogMutation {
+	return _u.mutation
 }
 
 // ClearTasks clears the "tasks" edge to the Task entity.
-func (tluo *TaskLogUpdateOne) ClearTasks() *TaskLogUpdateOne {
-	tluo.mutation.ClearTasks()
-	return tluo
+func (_u *TaskLogUpdateOne) ClearTasks() *TaskLogUpdateOne {
+	_u.mutation.ClearTasks()
+	return _u
 }
 
 // Where appends a list predicates to the TaskLogUpdate builder.
-func (tluo *TaskLogUpdateOne) Where(ps ...predicate.TaskLog) *TaskLogUpdateOne {
-	tluo.mutation.Where(ps...)
-	return tluo
+func (_u *TaskLogUpdateOne) Where(ps ...predicate.TaskLog) *TaskLogUpdateOne {
+	_u.mutation.Where(ps...)
+	return _u
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (tluo *TaskLogUpdateOne) Select(field string, fields ...string) *TaskLogUpdateOne {
-	tluo.fields = append([]string{field}, fields...)
-	return tluo
+func (_u *TaskLogUpdateOne) Select(field string, fields ...string) *TaskLogUpdateOne {
+	_u.fields = append([]string{field}, fields...)
+	return _u
 }
 
 // Save executes the query and returns the updated TaskLog entity.
-func (tluo *TaskLogUpdateOne) Save(ctx context.Context) (*TaskLog, error) {
-	return withHooks(ctx, tluo.sqlSave, tluo.mutation, tluo.hooks)
+func (_u *TaskLogUpdateOne) Save(ctx context.Context) (*TaskLog, error) {
+	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (tluo *TaskLogUpdateOne) SaveX(ctx context.Context) *TaskLog {
-	node, err := tluo.Save(ctx)
+func (_u *TaskLogUpdateOne) SaveX(ctx context.Context) *TaskLog {
+	node, err := _u.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -281,26 +281,26 @@ func (tluo *TaskLogUpdateOne) SaveX(ctx context.Context) *TaskLog {
 }
 
 // Exec executes the query on the entity.
-func (tluo *TaskLogUpdateOne) Exec(ctx context.Context) error {
-	_, err := tluo.Save(ctx)
+func (_u *TaskLogUpdateOne) Exec(ctx context.Context) error {
+	_, err := _u.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (tluo *TaskLogUpdateOne) ExecX(ctx context.Context) {
-	if err := tluo.Exec(ctx); err != nil {
+func (_u *TaskLogUpdateOne) ExecX(ctx context.Context) {
+	if err := _u.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
-func (tluo *TaskLogUpdateOne) sqlSave(ctx context.Context) (_node *TaskLog, err error) {
+func (_u *TaskLogUpdateOne) sqlSave(ctx context.Context) (_node *TaskLog, err error) {
 	_spec := sqlgraph.NewUpdateSpec(tasklog.Table, tasklog.Columns, sqlgraph.NewFieldSpec(tasklog.FieldID, field.TypeUint64))
-	id, ok := tluo.mutation.ID()
+	id, ok := _u.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "TaskLog.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := tluo.fields; len(fields) > 0 {
+	if fields := _u.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, tasklog.FieldID)
 		for _, f := range fields {
@@ -312,23 +312,23 @@ func (tluo *TaskLogUpdateOne) sqlSave(ctx context.Context) (_node *TaskLog, err 
 			}
 		}
 	}
-	if ps := tluo.mutation.predicates; len(ps) > 0 {
+	if ps := _u.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := tluo.mutation.FinishedAt(); ok {
+	if value, ok := _u.mutation.FinishedAt(); ok {
 		_spec.SetField(tasklog.FieldFinishedAt, field.TypeTime, value)
 	}
-	if value, ok := tluo.mutation.Result(); ok {
+	if value, ok := _u.mutation.Result(); ok {
 		_spec.SetField(tasklog.FieldResult, field.TypeUint8, value)
 	}
-	if value, ok := tluo.mutation.AddedResult(); ok {
+	if value, ok := _u.mutation.AddedResult(); ok {
 		_spec.AddField(tasklog.FieldResult, field.TypeUint8, value)
 	}
-	if tluo.mutation.TasksCleared() {
+	if _u.mutation.TasksCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -341,7 +341,7 @@ func (tluo *TaskLogUpdateOne) sqlSave(ctx context.Context) (_node *TaskLog, err 
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := tluo.mutation.TasksIDs(); len(nodes) > 0 {
+	if nodes := _u.mutation.TasksIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -357,10 +357,10 @@ func (tluo *TaskLogUpdateOne) sqlSave(ctx context.Context) (_node *TaskLog, err 
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_node = &TaskLog{config: tluo.config}
+	_node = &TaskLog{config: _u.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, tluo.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{tasklog.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -368,6 +368,6 @@ func (tluo *TaskLogUpdateOne) sqlSave(ctx context.Context) (_node *TaskLog, err 
 		}
 		return nil, err
 	}
-	tluo.mutation.done = true
+	_u.mutation.done = true
 	return _node, nil
 }

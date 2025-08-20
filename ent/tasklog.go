@@ -71,7 +71,7 @@ func (*TaskLog) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the TaskLog fields.
-func (tl *TaskLog) assignValues(columns []string, values []any) error {
+func (_m *TaskLog) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -82,34 +82,34 @@ func (tl *TaskLog) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			tl.ID = uint64(value.Int64)
+			_m.ID = uint64(value.Int64)
 		case tasklog.FieldStartedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field started_at", values[i])
 			} else if value.Valid {
-				tl.StartedAt = value.Time
+				_m.StartedAt = value.Time
 			}
 		case tasklog.FieldFinishedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field finished_at", values[i])
 			} else if value.Valid {
-				tl.FinishedAt = value.Time
+				_m.FinishedAt = value.Time
 			}
 		case tasklog.FieldResult:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field result", values[i])
 			} else if value.Valid {
-				tl.Result = uint8(value.Int64)
+				_m.Result = uint8(value.Int64)
 			}
 		case tasklog.ForeignKeys[0]:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for edge-field task_task_logs", value)
 			} else if value.Valid {
-				tl.task_task_logs = new(uint64)
-				*tl.task_task_logs = uint64(value.Int64)
+				_m.task_task_logs = new(uint64)
+				*_m.task_task_logs = uint64(value.Int64)
 			}
 		default:
-			tl.selectValues.Set(columns[i], values[i])
+			_m.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -117,46 +117,46 @@ func (tl *TaskLog) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the TaskLog.
 // This includes values selected through modifiers, order, etc.
-func (tl *TaskLog) Value(name string) (ent.Value, error) {
-	return tl.selectValues.Get(name)
+func (_m *TaskLog) Value(name string) (ent.Value, error) {
+	return _m.selectValues.Get(name)
 }
 
 // QueryTasks queries the "tasks" edge of the TaskLog entity.
-func (tl *TaskLog) QueryTasks() *TaskQuery {
-	return NewTaskLogClient(tl.config).QueryTasks(tl)
+func (_m *TaskLog) QueryTasks() *TaskQuery {
+	return NewTaskLogClient(_m.config).QueryTasks(_m)
 }
 
 // Update returns a builder for updating this TaskLog.
 // Note that you need to call TaskLog.Unwrap() before calling this method if this TaskLog
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (tl *TaskLog) Update() *TaskLogUpdateOne {
-	return NewTaskLogClient(tl.config).UpdateOne(tl)
+func (_m *TaskLog) Update() *TaskLogUpdateOne {
+	return NewTaskLogClient(_m.config).UpdateOne(_m)
 }
 
 // Unwrap unwraps the TaskLog entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (tl *TaskLog) Unwrap() *TaskLog {
-	_tx, ok := tl.config.driver.(*txDriver)
+func (_m *TaskLog) Unwrap() *TaskLog {
+	_tx, ok := _m.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: TaskLog is not a transactional entity")
 	}
-	tl.config.driver = _tx.drv
-	return tl
+	_m.config.driver = _tx.drv
+	return _m
 }
 
 // String implements the fmt.Stringer.
-func (tl *TaskLog) String() string {
+func (_m *TaskLog) String() string {
 	var builder strings.Builder
 	builder.WriteString("TaskLog(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", tl.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
 	builder.WriteString("started_at=")
-	builder.WriteString(tl.StartedAt.Format(time.ANSIC))
+	builder.WriteString(_m.StartedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("finished_at=")
-	builder.WriteString(tl.FinishedAt.Format(time.ANSIC))
+	builder.WriteString(_m.FinishedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("result=")
-	builder.WriteString(fmt.Sprintf("%v", tl.Result))
+	builder.WriteString(fmt.Sprintf("%v", _m.Result))
 	builder.WriteByte(')')
 	return builder.String()
 }

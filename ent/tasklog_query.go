@@ -31,44 +31,44 @@ type TaskLogQuery struct {
 }
 
 // Where adds a new predicate for the TaskLogQuery builder.
-func (tlq *TaskLogQuery) Where(ps ...predicate.TaskLog) *TaskLogQuery {
-	tlq.predicates = append(tlq.predicates, ps...)
-	return tlq
+func (_q *TaskLogQuery) Where(ps ...predicate.TaskLog) *TaskLogQuery {
+	_q.predicates = append(_q.predicates, ps...)
+	return _q
 }
 
 // Limit the number of records to be returned by this query.
-func (tlq *TaskLogQuery) Limit(limit int) *TaskLogQuery {
-	tlq.ctx.Limit = &limit
-	return tlq
+func (_q *TaskLogQuery) Limit(limit int) *TaskLogQuery {
+	_q.ctx.Limit = &limit
+	return _q
 }
 
 // Offset to start from.
-func (tlq *TaskLogQuery) Offset(offset int) *TaskLogQuery {
-	tlq.ctx.Offset = &offset
-	return tlq
+func (_q *TaskLogQuery) Offset(offset int) *TaskLogQuery {
+	_q.ctx.Offset = &offset
+	return _q
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (tlq *TaskLogQuery) Unique(unique bool) *TaskLogQuery {
-	tlq.ctx.Unique = &unique
-	return tlq
+func (_q *TaskLogQuery) Unique(unique bool) *TaskLogQuery {
+	_q.ctx.Unique = &unique
+	return _q
 }
 
 // Order specifies how the records should be ordered.
-func (tlq *TaskLogQuery) Order(o ...tasklog.OrderOption) *TaskLogQuery {
-	tlq.order = append(tlq.order, o...)
-	return tlq
+func (_q *TaskLogQuery) Order(o ...tasklog.OrderOption) *TaskLogQuery {
+	_q.order = append(_q.order, o...)
+	return _q
 }
 
 // QueryTasks chains the current query on the "tasks" edge.
-func (tlq *TaskLogQuery) QueryTasks() *TaskQuery {
-	query := (&TaskClient{config: tlq.config}).Query()
+func (_q *TaskLogQuery) QueryTasks() *TaskQuery {
+	query := (&TaskClient{config: _q.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := tlq.prepareQuery(ctx); err != nil {
+		if err := _q.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := tlq.sqlQuery(ctx)
+		selector := _q.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -77,7 +77,7 @@ func (tlq *TaskLogQuery) QueryTasks() *TaskQuery {
 			sqlgraph.To(task.Table, task.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, tasklog.TasksTable, tasklog.TasksColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(tlq.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -85,8 +85,8 @@ func (tlq *TaskLogQuery) QueryTasks() *TaskQuery {
 
 // First returns the first TaskLog entity from the query.
 // Returns a *NotFoundError when no TaskLog was found.
-func (tlq *TaskLogQuery) First(ctx context.Context) (*TaskLog, error) {
-	nodes, err := tlq.Limit(1).All(setContextOp(ctx, tlq.ctx, ent.OpQueryFirst))
+func (_q *TaskLogQuery) First(ctx context.Context) (*TaskLog, error) {
+	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -97,8 +97,8 @@ func (tlq *TaskLogQuery) First(ctx context.Context) (*TaskLog, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (tlq *TaskLogQuery) FirstX(ctx context.Context) *TaskLog {
-	node, err := tlq.First(ctx)
+func (_q *TaskLogQuery) FirstX(ctx context.Context) *TaskLog {
+	node, err := _q.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -107,9 +107,9 @@ func (tlq *TaskLogQuery) FirstX(ctx context.Context) *TaskLog {
 
 // FirstID returns the first TaskLog ID from the query.
 // Returns a *NotFoundError when no TaskLog ID was found.
-func (tlq *TaskLogQuery) FirstID(ctx context.Context) (id uint64, err error) {
+func (_q *TaskLogQuery) FirstID(ctx context.Context) (id uint64, err error) {
 	var ids []uint64
-	if ids, err = tlq.Limit(1).IDs(setContextOp(ctx, tlq.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -120,8 +120,8 @@ func (tlq *TaskLogQuery) FirstID(ctx context.Context) (id uint64, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (tlq *TaskLogQuery) FirstIDX(ctx context.Context) uint64 {
-	id, err := tlq.FirstID(ctx)
+func (_q *TaskLogQuery) FirstIDX(ctx context.Context) uint64 {
+	id, err := _q.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -131,8 +131,8 @@ func (tlq *TaskLogQuery) FirstIDX(ctx context.Context) uint64 {
 // Only returns a single TaskLog entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one TaskLog entity is found.
 // Returns a *NotFoundError when no TaskLog entities are found.
-func (tlq *TaskLogQuery) Only(ctx context.Context) (*TaskLog, error) {
-	nodes, err := tlq.Limit(2).All(setContextOp(ctx, tlq.ctx, ent.OpQueryOnly))
+func (_q *TaskLogQuery) Only(ctx context.Context) (*TaskLog, error) {
+	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -147,8 +147,8 @@ func (tlq *TaskLogQuery) Only(ctx context.Context) (*TaskLog, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (tlq *TaskLogQuery) OnlyX(ctx context.Context) *TaskLog {
-	node, err := tlq.Only(ctx)
+func (_q *TaskLogQuery) OnlyX(ctx context.Context) *TaskLog {
+	node, err := _q.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -158,9 +158,9 @@ func (tlq *TaskLogQuery) OnlyX(ctx context.Context) *TaskLog {
 // OnlyID is like Only, but returns the only TaskLog ID in the query.
 // Returns a *NotSingularError when more than one TaskLog ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (tlq *TaskLogQuery) OnlyID(ctx context.Context) (id uint64, err error) {
+func (_q *TaskLogQuery) OnlyID(ctx context.Context) (id uint64, err error) {
 	var ids []uint64
-	if ids, err = tlq.Limit(2).IDs(setContextOp(ctx, tlq.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -175,8 +175,8 @@ func (tlq *TaskLogQuery) OnlyID(ctx context.Context) (id uint64, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (tlq *TaskLogQuery) OnlyIDX(ctx context.Context) uint64 {
-	id, err := tlq.OnlyID(ctx)
+func (_q *TaskLogQuery) OnlyIDX(ctx context.Context) uint64 {
+	id, err := _q.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -184,18 +184,18 @@ func (tlq *TaskLogQuery) OnlyIDX(ctx context.Context) uint64 {
 }
 
 // All executes the query and returns a list of TaskLogs.
-func (tlq *TaskLogQuery) All(ctx context.Context) ([]*TaskLog, error) {
-	ctx = setContextOp(ctx, tlq.ctx, ent.OpQueryAll)
-	if err := tlq.prepareQuery(ctx); err != nil {
+func (_q *TaskLogQuery) All(ctx context.Context) ([]*TaskLog, error) {
+	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
+	if err := _q.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*TaskLog, *TaskLogQuery]()
-	return withInterceptors[[]*TaskLog](ctx, tlq, qr, tlq.inters)
+	return withInterceptors[[]*TaskLog](ctx, _q, qr, _q.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (tlq *TaskLogQuery) AllX(ctx context.Context) []*TaskLog {
-	nodes, err := tlq.All(ctx)
+func (_q *TaskLogQuery) AllX(ctx context.Context) []*TaskLog {
+	nodes, err := _q.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -203,20 +203,20 @@ func (tlq *TaskLogQuery) AllX(ctx context.Context) []*TaskLog {
 }
 
 // IDs executes the query and returns a list of TaskLog IDs.
-func (tlq *TaskLogQuery) IDs(ctx context.Context) (ids []uint64, err error) {
-	if tlq.ctx.Unique == nil && tlq.path != nil {
-		tlq.Unique(true)
+func (_q *TaskLogQuery) IDs(ctx context.Context) (ids []uint64, err error) {
+	if _q.ctx.Unique == nil && _q.path != nil {
+		_q.Unique(true)
 	}
-	ctx = setContextOp(ctx, tlq.ctx, ent.OpQueryIDs)
-	if err = tlq.Select(tasklog.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
+	if err = _q.Select(tasklog.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (tlq *TaskLogQuery) IDsX(ctx context.Context) []uint64 {
-	ids, err := tlq.IDs(ctx)
+func (_q *TaskLogQuery) IDsX(ctx context.Context) []uint64 {
+	ids, err := _q.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -224,17 +224,17 @@ func (tlq *TaskLogQuery) IDsX(ctx context.Context) []uint64 {
 }
 
 // Count returns the count of the given query.
-func (tlq *TaskLogQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, tlq.ctx, ent.OpQueryCount)
-	if err := tlq.prepareQuery(ctx); err != nil {
+func (_q *TaskLogQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
+	if err := _q.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, tlq, querierCount[*TaskLogQuery](), tlq.inters)
+	return withInterceptors[int](ctx, _q, querierCount[*TaskLogQuery](), _q.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (tlq *TaskLogQuery) CountX(ctx context.Context) int {
-	count, err := tlq.Count(ctx)
+func (_q *TaskLogQuery) CountX(ctx context.Context) int {
+	count, err := _q.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -242,9 +242,9 @@ func (tlq *TaskLogQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (tlq *TaskLogQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, tlq.ctx, ent.OpQueryExist)
-	switch _, err := tlq.FirstID(ctx); {
+func (_q *TaskLogQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
+	switch _, err := _q.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -255,8 +255,8 @@ func (tlq *TaskLogQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (tlq *TaskLogQuery) ExistX(ctx context.Context) bool {
-	exist, err := tlq.Exist(ctx)
+func (_q *TaskLogQuery) ExistX(ctx context.Context) bool {
+	exist, err := _q.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -265,32 +265,32 @@ func (tlq *TaskLogQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the TaskLogQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (tlq *TaskLogQuery) Clone() *TaskLogQuery {
-	if tlq == nil {
+func (_q *TaskLogQuery) Clone() *TaskLogQuery {
+	if _q == nil {
 		return nil
 	}
 	return &TaskLogQuery{
-		config:     tlq.config,
-		ctx:        tlq.ctx.Clone(),
-		order:      append([]tasklog.OrderOption{}, tlq.order...),
-		inters:     append([]Interceptor{}, tlq.inters...),
-		predicates: append([]predicate.TaskLog{}, tlq.predicates...),
-		withTasks:  tlq.withTasks.Clone(),
+		config:     _q.config,
+		ctx:        _q.ctx.Clone(),
+		order:      append([]tasklog.OrderOption{}, _q.order...),
+		inters:     append([]Interceptor{}, _q.inters...),
+		predicates: append([]predicate.TaskLog{}, _q.predicates...),
+		withTasks:  _q.withTasks.Clone(),
 		// clone intermediate query.
-		sql:  tlq.sql.Clone(),
-		path: tlq.path,
+		sql:  _q.sql.Clone(),
+		path: _q.path,
 	}
 }
 
 // WithTasks tells the query-builder to eager-load the nodes that are connected to
 // the "tasks" edge. The optional arguments are used to configure the query builder of the edge.
-func (tlq *TaskLogQuery) WithTasks(opts ...func(*TaskQuery)) *TaskLogQuery {
-	query := (&TaskClient{config: tlq.config}).Query()
+func (_q *TaskLogQuery) WithTasks(opts ...func(*TaskQuery)) *TaskLogQuery {
+	query := (&TaskClient{config: _q.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	tlq.withTasks = query
-	return tlq
+	_q.withTasks = query
+	return _q
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -307,10 +307,10 @@ func (tlq *TaskLogQuery) WithTasks(opts ...func(*TaskQuery)) *TaskLogQuery {
 //		GroupBy(tasklog.FieldStartedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (tlq *TaskLogQuery) GroupBy(field string, fields ...string) *TaskLogGroupBy {
-	tlq.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &TaskLogGroupBy{build: tlq}
-	grbuild.flds = &tlq.ctx.Fields
+func (_q *TaskLogQuery) GroupBy(field string, fields ...string) *TaskLogGroupBy {
+	_q.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &TaskLogGroupBy{build: _q}
+	grbuild.flds = &_q.ctx.Fields
 	grbuild.label = tasklog.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -328,55 +328,55 @@ func (tlq *TaskLogQuery) GroupBy(field string, fields ...string) *TaskLogGroupBy
 //	client.TaskLog.Query().
 //		Select(tasklog.FieldStartedAt).
 //		Scan(ctx, &v)
-func (tlq *TaskLogQuery) Select(fields ...string) *TaskLogSelect {
-	tlq.ctx.Fields = append(tlq.ctx.Fields, fields...)
-	sbuild := &TaskLogSelect{TaskLogQuery: tlq}
+func (_q *TaskLogQuery) Select(fields ...string) *TaskLogSelect {
+	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
+	sbuild := &TaskLogSelect{TaskLogQuery: _q}
 	sbuild.label = tasklog.Label
-	sbuild.flds, sbuild.scan = &tlq.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a TaskLogSelect configured with the given aggregations.
-func (tlq *TaskLogQuery) Aggregate(fns ...AggregateFunc) *TaskLogSelect {
-	return tlq.Select().Aggregate(fns...)
+func (_q *TaskLogQuery) Aggregate(fns ...AggregateFunc) *TaskLogSelect {
+	return _q.Select().Aggregate(fns...)
 }
 
-func (tlq *TaskLogQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range tlq.inters {
+func (_q *TaskLogQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range _q.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, tlq); err != nil {
+			if err := trv.Traverse(ctx, _q); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range tlq.ctx.Fields {
+	for _, f := range _q.ctx.Fields {
 		if !tasklog.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if tlq.path != nil {
-		prev, err := tlq.path(ctx)
+	if _q.path != nil {
+		prev, err := _q.path(ctx)
 		if err != nil {
 			return err
 		}
-		tlq.sql = prev
+		_q.sql = prev
 	}
 	return nil
 }
 
-func (tlq *TaskLogQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*TaskLog, error) {
+func (_q *TaskLogQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*TaskLog, error) {
 	var (
 		nodes       = []*TaskLog{}
-		withFKs     = tlq.withFKs
-		_spec       = tlq.querySpec()
+		withFKs     = _q.withFKs
+		_spec       = _q.querySpec()
 		loadedTypes = [1]bool{
-			tlq.withTasks != nil,
+			_q.withTasks != nil,
 		}
 	)
-	if tlq.withTasks != nil {
+	if _q.withTasks != nil {
 		withFKs = true
 	}
 	if withFKs {
@@ -386,7 +386,7 @@ func (tlq *TaskLogQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Tas
 		return (*TaskLog).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &TaskLog{config: tlq.config}
+		node := &TaskLog{config: _q.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
@@ -394,14 +394,14 @@ func (tlq *TaskLogQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Tas
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, tlq.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := tlq.withTasks; query != nil {
-		if err := tlq.loadTasks(ctx, query, nodes, nil,
+	if query := _q.withTasks; query != nil {
+		if err := _q.loadTasks(ctx, query, nodes, nil,
 			func(n *TaskLog, e *Task) { n.Edges.Tasks = e }); err != nil {
 			return nil, err
 		}
@@ -409,7 +409,7 @@ func (tlq *TaskLogQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Tas
 	return nodes, nil
 }
 
-func (tlq *TaskLogQuery) loadTasks(ctx context.Context, query *TaskQuery, nodes []*TaskLog, init func(*TaskLog), assign func(*TaskLog, *Task)) error {
+func (_q *TaskLogQuery) loadTasks(ctx context.Context, query *TaskQuery, nodes []*TaskLog, init func(*TaskLog), assign func(*TaskLog, *Task)) error {
 	ids := make([]uint64, 0, len(nodes))
 	nodeids := make(map[uint64][]*TaskLog)
 	for i := range nodes {
@@ -442,24 +442,24 @@ func (tlq *TaskLogQuery) loadTasks(ctx context.Context, query *TaskQuery, nodes 
 	return nil
 }
 
-func (tlq *TaskLogQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := tlq.querySpec()
-	_spec.Node.Columns = tlq.ctx.Fields
-	if len(tlq.ctx.Fields) > 0 {
-		_spec.Unique = tlq.ctx.Unique != nil && *tlq.ctx.Unique
+func (_q *TaskLogQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := _q.querySpec()
+	_spec.Node.Columns = _q.ctx.Fields
+	if len(_q.ctx.Fields) > 0 {
+		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, tlq.driver, _spec)
+	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
 }
 
-func (tlq *TaskLogQuery) querySpec() *sqlgraph.QuerySpec {
+func (_q *TaskLogQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(tasklog.Table, tasklog.Columns, sqlgraph.NewFieldSpec(tasklog.FieldID, field.TypeUint64))
-	_spec.From = tlq.sql
-	if unique := tlq.ctx.Unique; unique != nil {
+	_spec.From = _q.sql
+	if unique := _q.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if tlq.path != nil {
+	} else if _q.path != nil {
 		_spec.Unique = true
 	}
-	if fields := tlq.ctx.Fields; len(fields) > 0 {
+	if fields := _q.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, tasklog.FieldID)
 		for i := range fields {
@@ -468,20 +468,20 @@ func (tlq *TaskLogQuery) querySpec() *sqlgraph.QuerySpec {
 			}
 		}
 	}
-	if ps := tlq.predicates; len(ps) > 0 {
+	if ps := _q.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := tlq.ctx.Limit; limit != nil {
+	if limit := _q.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := tlq.ctx.Offset; offset != nil {
+	if offset := _q.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := tlq.order; len(ps) > 0 {
+	if ps := _q.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -491,33 +491,33 @@ func (tlq *TaskLogQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (tlq *TaskLogQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(tlq.driver.Dialect())
+func (_q *TaskLogQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(_q.driver.Dialect())
 	t1 := builder.Table(tasklog.Table)
-	columns := tlq.ctx.Fields
+	columns := _q.ctx.Fields
 	if len(columns) == 0 {
 		columns = tasklog.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if tlq.sql != nil {
-		selector = tlq.sql
+	if _q.sql != nil {
+		selector = _q.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if tlq.ctx.Unique != nil && *tlq.ctx.Unique {
+	if _q.ctx.Unique != nil && *_q.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, p := range tlq.predicates {
+	for _, p := range _q.predicates {
 		p(selector)
 	}
-	for _, p := range tlq.order {
+	for _, p := range _q.order {
 		p(selector)
 	}
-	if offset := tlq.ctx.Offset; offset != nil {
+	if offset := _q.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := tlq.ctx.Limit; limit != nil {
+	if limit := _q.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
@@ -530,41 +530,41 @@ type TaskLogGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (tlgb *TaskLogGroupBy) Aggregate(fns ...AggregateFunc) *TaskLogGroupBy {
-	tlgb.fns = append(tlgb.fns, fns...)
-	return tlgb
+func (_g *TaskLogGroupBy) Aggregate(fns ...AggregateFunc) *TaskLogGroupBy {
+	_g.fns = append(_g.fns, fns...)
+	return _g
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (tlgb *TaskLogGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, tlgb.build.ctx, ent.OpQueryGroupBy)
-	if err := tlgb.build.prepareQuery(ctx); err != nil {
+func (_g *TaskLogGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
+	if err := _g.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*TaskLogQuery, *TaskLogGroupBy](ctx, tlgb.build, tlgb, tlgb.build.inters, v)
+	return scanWithInterceptors[*TaskLogQuery, *TaskLogGroupBy](ctx, _g.build, _g, _g.build.inters, v)
 }
 
-func (tlgb *TaskLogGroupBy) sqlScan(ctx context.Context, root *TaskLogQuery, v any) error {
+func (_g *TaskLogGroupBy) sqlScan(ctx context.Context, root *TaskLogQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(tlgb.fns))
-	for _, fn := range tlgb.fns {
+	aggregation := make([]string, 0, len(_g.fns))
+	for _, fn := range _g.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*tlgb.flds)+len(tlgb.fns))
-		for _, f := range *tlgb.flds {
+		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
+		for _, f := range *_g.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*tlgb.flds...)...)
+	selector.GroupBy(selector.Columns(*_g.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := tlgb.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -578,27 +578,27 @@ type TaskLogSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (tls *TaskLogSelect) Aggregate(fns ...AggregateFunc) *TaskLogSelect {
-	tls.fns = append(tls.fns, fns...)
-	return tls
+func (_s *TaskLogSelect) Aggregate(fns ...AggregateFunc) *TaskLogSelect {
+	_s.fns = append(_s.fns, fns...)
+	return _s
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (tls *TaskLogSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, tls.ctx, ent.OpQuerySelect)
-	if err := tls.prepareQuery(ctx); err != nil {
+func (_s *TaskLogSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
+	if err := _s.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*TaskLogQuery, *TaskLogSelect](ctx, tls.TaskLogQuery, tls, tls.inters, v)
+	return scanWithInterceptors[*TaskLogQuery, *TaskLogSelect](ctx, _s.TaskLogQuery, _s, _s.inters, v)
 }
 
-func (tls *TaskLogSelect) sqlScan(ctx context.Context, root *TaskLogQuery, v any) error {
+func (_s *TaskLogSelect) sqlScan(ctx context.Context, root *TaskLogQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(tls.fns))
-	for _, fn := range tls.fns {
+	aggregation := make([]string, 0, len(_s.fns))
+	for _, fn := range _s.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*tls.selector.flds); {
+	switch n := len(*_s.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -606,7 +606,7 @@ func (tls *TaskLogSelect) sqlScan(ctx context.Context, root *TaskLogQuery, v any
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := tls.driver.Query(ctx, query, args, rows); err != nil {
+	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()

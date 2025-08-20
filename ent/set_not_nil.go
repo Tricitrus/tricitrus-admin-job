@@ -5,217 +5,217 @@ package ent
 import "time"
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdate) SetNotNilUpdatedAt(value *time.Time) *TaskUpdate {
+func (_m *TaskUpdate) SetNotNilUpdatedAt(value *time.Time) *TaskUpdate {
 	if value != nil {
-		return t.SetUpdatedAt(*value)
+		return _m.SetUpdatedAt(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdateOne) SetNotNilUpdatedAt(value *time.Time) *TaskUpdateOne {
+func (_m *TaskUpdateOne) SetNotNilUpdatedAt(value *time.Time) *TaskUpdateOne {
 	if value != nil {
-		return t.SetUpdatedAt(*value)
+		return _m.SetUpdatedAt(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskCreate) SetNotNilUpdatedAt(value *time.Time) *TaskCreate {
+func (_m *TaskCreate) SetNotNilUpdatedAt(value *time.Time) *TaskCreate {
 	if value != nil {
-		return t.SetUpdatedAt(*value)
+		return _m.SetUpdatedAt(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdate) SetNotNilStatus(value *uint8) *TaskUpdate {
+func (_m *TaskUpdate) SetNotNilStatus(value *uint8) *TaskUpdate {
 	if value != nil {
-		return t.SetStatus(*value)
+		return _m.SetStatus(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdateOne) SetNotNilStatus(value *uint8) *TaskUpdateOne {
+func (_m *TaskUpdateOne) SetNotNilStatus(value *uint8) *TaskUpdateOne {
 	if value != nil {
-		return t.SetStatus(*value)
+		return _m.SetStatus(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskCreate) SetNotNilStatus(value *uint8) *TaskCreate {
+func (_m *TaskCreate) SetNotNilStatus(value *uint8) *TaskCreate {
 	if value != nil {
-		return t.SetStatus(*value)
+		return _m.SetStatus(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdate) SetNotNilName(value *string) *TaskUpdate {
+func (_m *TaskUpdate) SetNotNilName(value *string) *TaskUpdate {
 	if value != nil {
-		return t.SetName(*value)
+		return _m.SetName(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdateOne) SetNotNilName(value *string) *TaskUpdateOne {
+func (_m *TaskUpdateOne) SetNotNilName(value *string) *TaskUpdateOne {
 	if value != nil {
-		return t.SetName(*value)
+		return _m.SetName(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskCreate) SetNotNilName(value *string) *TaskCreate {
+func (_m *TaskCreate) SetNotNilName(value *string) *TaskCreate {
 	if value != nil {
-		return t.SetName(*value)
+		return _m.SetName(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdate) SetNotNilTaskGroup(value *string) *TaskUpdate {
+func (_m *TaskUpdate) SetNotNilTaskGroup(value *string) *TaskUpdate {
 	if value != nil {
-		return t.SetTaskGroup(*value)
+		return _m.SetTaskGroup(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdateOne) SetNotNilTaskGroup(value *string) *TaskUpdateOne {
+func (_m *TaskUpdateOne) SetNotNilTaskGroup(value *string) *TaskUpdateOne {
 	if value != nil {
-		return t.SetTaskGroup(*value)
+		return _m.SetTaskGroup(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskCreate) SetNotNilTaskGroup(value *string) *TaskCreate {
+func (_m *TaskCreate) SetNotNilTaskGroup(value *string) *TaskCreate {
 	if value != nil {
-		return t.SetTaskGroup(*value)
+		return _m.SetTaskGroup(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdate) SetNotNilCronExpression(value *string) *TaskUpdate {
+func (_m *TaskUpdate) SetNotNilCronExpression(value *string) *TaskUpdate {
 	if value != nil {
-		return t.SetCronExpression(*value)
+		return _m.SetCronExpression(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdateOne) SetNotNilCronExpression(value *string) *TaskUpdateOne {
+func (_m *TaskUpdateOne) SetNotNilCronExpression(value *string) *TaskUpdateOne {
 	if value != nil {
-		return t.SetCronExpression(*value)
+		return _m.SetCronExpression(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskCreate) SetNotNilCronExpression(value *string) *TaskCreate {
+func (_m *TaskCreate) SetNotNilCronExpression(value *string) *TaskCreate {
 	if value != nil {
-		return t.SetCronExpression(*value)
+		return _m.SetCronExpression(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdate) SetNotNilPattern(value *string) *TaskUpdate {
+func (_m *TaskUpdate) SetNotNilPattern(value *string) *TaskUpdate {
 	if value != nil {
-		return t.SetPattern(*value)
+		return _m.SetPattern(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdateOne) SetNotNilPattern(value *string) *TaskUpdateOne {
+func (_m *TaskUpdateOne) SetNotNilPattern(value *string) *TaskUpdateOne {
 	if value != nil {
-		return t.SetPattern(*value)
+		return _m.SetPattern(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskCreate) SetNotNilPattern(value *string) *TaskCreate {
+func (_m *TaskCreate) SetNotNilPattern(value *string) *TaskCreate {
 	if value != nil {
-		return t.SetPattern(*value)
+		return _m.SetPattern(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdate) SetNotNilPayload(value *string) *TaskUpdate {
+func (_m *TaskUpdate) SetNotNilPayload(value *string) *TaskUpdate {
 	if value != nil {
-		return t.SetPayload(*value)
+		return _m.SetPayload(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskUpdateOne) SetNotNilPayload(value *string) *TaskUpdateOne {
+func (_m *TaskUpdateOne) SetNotNilPayload(value *string) *TaskUpdateOne {
 	if value != nil {
-		return t.SetPayload(*value)
+		return _m.SetPayload(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (t *TaskCreate) SetNotNilPayload(value *string) *TaskCreate {
+func (_m *TaskCreate) SetNotNilPayload(value *string) *TaskCreate {
 	if value != nil {
-		return t.SetPayload(*value)
+		return _m.SetPayload(*value)
 	}
-	return t
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (tl *TaskLogUpdate) SetNotNilFinishedAt(value *time.Time) *TaskLogUpdate {
+func (_m *TaskLogUpdate) SetNotNilFinishedAt(value *time.Time) *TaskLogUpdate {
 	if value != nil {
-		return tl.SetFinishedAt(*value)
+		return _m.SetFinishedAt(*value)
 	}
-	return tl
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (tl *TaskLogUpdateOne) SetNotNilFinishedAt(value *time.Time) *TaskLogUpdateOne {
+func (_m *TaskLogUpdateOne) SetNotNilFinishedAt(value *time.Time) *TaskLogUpdateOne {
 	if value != nil {
-		return tl.SetFinishedAt(*value)
+		return _m.SetFinishedAt(*value)
 	}
-	return tl
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (tl *TaskLogCreate) SetNotNilFinishedAt(value *time.Time) *TaskLogCreate {
+func (_m *TaskLogCreate) SetNotNilFinishedAt(value *time.Time) *TaskLogCreate {
 	if value != nil {
-		return tl.SetFinishedAt(*value)
+		return _m.SetFinishedAt(*value)
 	}
-	return tl
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (tl *TaskLogUpdate) SetNotNilResult(value *uint8) *TaskLogUpdate {
+func (_m *TaskLogUpdate) SetNotNilResult(value *uint8) *TaskLogUpdate {
 	if value != nil {
-		return tl.SetResult(*value)
+		return _m.SetResult(*value)
 	}
-	return tl
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (tl *TaskLogUpdateOne) SetNotNilResult(value *uint8) *TaskLogUpdateOne {
+func (_m *TaskLogUpdateOne) SetNotNilResult(value *uint8) *TaskLogUpdateOne {
 	if value != nil {
-		return tl.SetResult(*value)
+		return _m.SetResult(*value)
 	}
-	return tl
+	return _m
 }
 
 // set field if value's pointer is not nil.
-func (tl *TaskLogCreate) SetNotNilResult(value *uint8) *TaskLogCreate {
+func (_m *TaskLogCreate) SetNotNilResult(value *uint8) *TaskLogCreate {
 	if value != nil {
-		return tl.SetResult(*value)
+		return _m.SetResult(*value)
 	}
-	return tl
+	return _m
 }

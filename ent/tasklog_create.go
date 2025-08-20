@@ -22,70 +22,70 @@ type TaskLogCreate struct {
 }
 
 // SetStartedAt sets the "started_at" field.
-func (tlc *TaskLogCreate) SetStartedAt(t time.Time) *TaskLogCreate {
-	tlc.mutation.SetStartedAt(t)
-	return tlc
+func (_c *TaskLogCreate) SetStartedAt(v time.Time) *TaskLogCreate {
+	_c.mutation.SetStartedAt(v)
+	return _c
 }
 
 // SetNillableStartedAt sets the "started_at" field if the given value is not nil.
-func (tlc *TaskLogCreate) SetNillableStartedAt(t *time.Time) *TaskLogCreate {
-	if t != nil {
-		tlc.SetStartedAt(*t)
+func (_c *TaskLogCreate) SetNillableStartedAt(v *time.Time) *TaskLogCreate {
+	if v != nil {
+		_c.SetStartedAt(*v)
 	}
-	return tlc
+	return _c
 }
 
 // SetFinishedAt sets the "finished_at" field.
-func (tlc *TaskLogCreate) SetFinishedAt(t time.Time) *TaskLogCreate {
-	tlc.mutation.SetFinishedAt(t)
-	return tlc
+func (_c *TaskLogCreate) SetFinishedAt(v time.Time) *TaskLogCreate {
+	_c.mutation.SetFinishedAt(v)
+	return _c
 }
 
 // SetResult sets the "result" field.
-func (tlc *TaskLogCreate) SetResult(u uint8) *TaskLogCreate {
-	tlc.mutation.SetResult(u)
-	return tlc
+func (_c *TaskLogCreate) SetResult(v uint8) *TaskLogCreate {
+	_c.mutation.SetResult(v)
+	return _c
 }
 
 // SetID sets the "id" field.
-func (tlc *TaskLogCreate) SetID(u uint64) *TaskLogCreate {
-	tlc.mutation.SetID(u)
-	return tlc
+func (_c *TaskLogCreate) SetID(v uint64) *TaskLogCreate {
+	_c.mutation.SetID(v)
+	return _c
 }
 
 // SetTasksID sets the "tasks" edge to the Task entity by ID.
-func (tlc *TaskLogCreate) SetTasksID(id uint64) *TaskLogCreate {
-	tlc.mutation.SetTasksID(id)
-	return tlc
+func (_c *TaskLogCreate) SetTasksID(id uint64) *TaskLogCreate {
+	_c.mutation.SetTasksID(id)
+	return _c
 }
 
 // SetNillableTasksID sets the "tasks" edge to the Task entity by ID if the given value is not nil.
-func (tlc *TaskLogCreate) SetNillableTasksID(id *uint64) *TaskLogCreate {
+func (_c *TaskLogCreate) SetNillableTasksID(id *uint64) *TaskLogCreate {
 	if id != nil {
-		tlc = tlc.SetTasksID(*id)
+		_c = _c.SetTasksID(*id)
 	}
-	return tlc
+	return _c
 }
 
 // SetTasks sets the "tasks" edge to the Task entity.
-func (tlc *TaskLogCreate) SetTasks(t *Task) *TaskLogCreate {
-	return tlc.SetTasksID(t.ID)
+func (_c *TaskLogCreate) SetTasks(v *Task) *TaskLogCreate {
+	return _c.SetTasksID(v.ID)
 }
 
 // Mutation returns the TaskLogMutation object of the builder.
-func (tlc *TaskLogCreate) Mutation() *TaskLogMutation {
-	return tlc.mutation
+func (_c *TaskLogCreate) Mutation() *TaskLogMutation {
+	return _c.mutation
 }
 
 // Save creates the TaskLog in the database.
-func (tlc *TaskLogCreate) Save(ctx context.Context) (*TaskLog, error) {
-	tlc.defaults()
-	return withHooks(ctx, tlc.sqlSave, tlc.mutation, tlc.hooks)
+func (_c *TaskLogCreate) Save(ctx context.Context) (*TaskLog, error) {
+	_c.defaults()
+	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (tlc *TaskLogCreate) SaveX(ctx context.Context) *TaskLog {
-	v, err := tlc.Save(ctx)
+func (_c *TaskLogCreate) SaveX(ctx context.Context) *TaskLog {
+	v, err := _c.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -93,46 +93,46 @@ func (tlc *TaskLogCreate) SaveX(ctx context.Context) *TaskLog {
 }
 
 // Exec executes the query.
-func (tlc *TaskLogCreate) Exec(ctx context.Context) error {
-	_, err := tlc.Save(ctx)
+func (_c *TaskLogCreate) Exec(ctx context.Context) error {
+	_, err := _c.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (tlc *TaskLogCreate) ExecX(ctx context.Context) {
-	if err := tlc.Exec(ctx); err != nil {
+func (_c *TaskLogCreate) ExecX(ctx context.Context) {
+	if err := _c.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (tlc *TaskLogCreate) defaults() {
-	if _, ok := tlc.mutation.StartedAt(); !ok {
+func (_c *TaskLogCreate) defaults() {
+	if _, ok := _c.mutation.StartedAt(); !ok {
 		v := tasklog.DefaultStartedAt()
-		tlc.mutation.SetStartedAt(v)
+		_c.mutation.SetStartedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (tlc *TaskLogCreate) check() error {
-	if _, ok := tlc.mutation.StartedAt(); !ok {
+func (_c *TaskLogCreate) check() error {
+	if _, ok := _c.mutation.StartedAt(); !ok {
 		return &ValidationError{Name: "started_at", err: errors.New(`ent: missing required field "TaskLog.started_at"`)}
 	}
-	if _, ok := tlc.mutation.FinishedAt(); !ok {
+	if _, ok := _c.mutation.FinishedAt(); !ok {
 		return &ValidationError{Name: "finished_at", err: errors.New(`ent: missing required field "TaskLog.finished_at"`)}
 	}
-	if _, ok := tlc.mutation.Result(); !ok {
+	if _, ok := _c.mutation.Result(); !ok {
 		return &ValidationError{Name: "result", err: errors.New(`ent: missing required field "TaskLog.result"`)}
 	}
 	return nil
 }
 
-func (tlc *TaskLogCreate) sqlSave(ctx context.Context) (*TaskLog, error) {
-	if err := tlc.check(); err != nil {
+func (_c *TaskLogCreate) sqlSave(ctx context.Context) (*TaskLog, error) {
+	if err := _c.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := tlc.createSpec()
-	if err := sqlgraph.CreateNode(ctx, tlc.driver, _spec); err != nil {
+	_node, _spec := _c.createSpec()
+	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -142,33 +142,33 @@ func (tlc *TaskLogCreate) sqlSave(ctx context.Context) (*TaskLog, error) {
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint64(id)
 	}
-	tlc.mutation.id = &_node.ID
-	tlc.mutation.done = true
+	_c.mutation.id = &_node.ID
+	_c.mutation.done = true
 	return _node, nil
 }
 
-func (tlc *TaskLogCreate) createSpec() (*TaskLog, *sqlgraph.CreateSpec) {
+func (_c *TaskLogCreate) createSpec() (*TaskLog, *sqlgraph.CreateSpec) {
 	var (
-		_node = &TaskLog{config: tlc.config}
+		_node = &TaskLog{config: _c.config}
 		_spec = sqlgraph.NewCreateSpec(tasklog.Table, sqlgraph.NewFieldSpec(tasklog.FieldID, field.TypeUint64))
 	)
-	if id, ok := tlc.mutation.ID(); ok {
+	if id, ok := _c.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := tlc.mutation.StartedAt(); ok {
+	if value, ok := _c.mutation.StartedAt(); ok {
 		_spec.SetField(tasklog.FieldStartedAt, field.TypeTime, value)
 		_node.StartedAt = value
 	}
-	if value, ok := tlc.mutation.FinishedAt(); ok {
+	if value, ok := _c.mutation.FinishedAt(); ok {
 		_spec.SetField(tasklog.FieldFinishedAt, field.TypeTime, value)
 		_node.FinishedAt = value
 	}
-	if value, ok := tlc.mutation.Result(); ok {
+	if value, ok := _c.mutation.Result(); ok {
 		_spec.SetField(tasklog.FieldResult, field.TypeUint8, value)
 		_node.Result = value
 	}
-	if nodes := tlc.mutation.TasksIDs(); len(nodes) > 0 {
+	if nodes := _c.mutation.TasksIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -196,16 +196,16 @@ type TaskLogCreateBulk struct {
 }
 
 // Save creates the TaskLog entities in the database.
-func (tlcb *TaskLogCreateBulk) Save(ctx context.Context) ([]*TaskLog, error) {
-	if tlcb.err != nil {
-		return nil, tlcb.err
+func (_c *TaskLogCreateBulk) Save(ctx context.Context) ([]*TaskLog, error) {
+	if _c.err != nil {
+		return nil, _c.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(tlcb.builders))
-	nodes := make([]*TaskLog, len(tlcb.builders))
-	mutators := make([]Mutator, len(tlcb.builders))
-	for i := range tlcb.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
+	nodes := make([]*TaskLog, len(_c.builders))
+	mutators := make([]Mutator, len(_c.builders))
+	for i := range _c.builders {
 		func(i int, root context.Context) {
-			builder := tlcb.builders[i]
+			builder := _c.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*TaskLogMutation)
@@ -219,11 +219,11 @@ func (tlcb *TaskLogCreateBulk) Save(ctx context.Context) ([]*TaskLog, error) {
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, tlcb.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, tlcb.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -247,7 +247,7 @@ func (tlcb *TaskLogCreateBulk) Save(ctx context.Context) ([]*TaskLog, error) {
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, tlcb.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -255,8 +255,8 @@ func (tlcb *TaskLogCreateBulk) Save(ctx context.Context) ([]*TaskLog, error) {
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (tlcb *TaskLogCreateBulk) SaveX(ctx context.Context) []*TaskLog {
-	v, err := tlcb.Save(ctx)
+func (_c *TaskLogCreateBulk) SaveX(ctx context.Context) []*TaskLog {
+	v, err := _c.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -264,14 +264,14 @@ func (tlcb *TaskLogCreateBulk) SaveX(ctx context.Context) []*TaskLog {
 }
 
 // Exec executes the query.
-func (tlcb *TaskLogCreateBulk) Exec(ctx context.Context) error {
-	_, err := tlcb.Save(ctx)
+func (_c *TaskLogCreateBulk) Exec(ctx context.Context) error {
+	_, err := _c.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (tlcb *TaskLogCreateBulk) ExecX(ctx context.Context) {
-	if err := tlcb.Exec(ctx); err != nil {
+func (_c *TaskLogCreateBulk) ExecX(ctx context.Context) {
+	if err := _c.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
