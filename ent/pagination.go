@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/suyuan32/simple-admin-job/ent/task"
-	"github.com/suyuan32/simple-admin-job/ent/tasklog"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/task"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/tasklog"
 )
 
 const errInvalidPage = "INVALID_PAGE"
@@ -94,7 +94,6 @@ type TaskPageList struct {
 func (_m *TaskQuery) Page(
 	ctx context.Context, pageNum uint64, pageSize uint64, opts ...TaskPaginateOption,
 ) (*TaskPageList, error) {
-
 	pager, err := newTaskPager(opts)
 	if err != nil {
 		return nil, err
@@ -114,7 +113,6 @@ func (_m *TaskQuery) Page(
 	query := _m.Clone()
 	query.ctx.Fields = nil
 	count, err := query.Count(ctx)
-
 	if err != nil {
 		return nil, err
 	}
@@ -175,7 +173,6 @@ type TaskLogPageList struct {
 func (_m *TaskLogQuery) Page(
 	ctx context.Context, pageNum uint64, pageSize uint64, opts ...TaskLogPaginateOption,
 ) (*TaskLogPageList, error) {
-
 	pager, err := newTaskLogPager(opts)
 	if err != nil {
 		return nil, err
@@ -195,7 +192,6 @@ func (_m *TaskLogQuery) Page(
 	query := _m.Clone()
 	query.ctx.Fields = nil
 	count, err := query.Count(ctx)
-
 	if err != nil {
 		return nil, err
 	}

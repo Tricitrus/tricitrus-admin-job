@@ -9,8 +9,8 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/suyuan32/simple-admin-job/ent/task"
-	"github.com/suyuan32/simple-admin-job/ent/tasklog"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/task"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/tasklog"
 )
 
 // Task Log Table | 任务日志表

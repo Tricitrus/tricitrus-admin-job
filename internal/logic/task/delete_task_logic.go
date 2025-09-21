@@ -3,15 +3,15 @@ package task
 import (
 	"context"
 
-	"github.com/suyuan32/simple-admin-job/ent"
-	"github.com/suyuan32/simple-admin-job/ent/task"
-	"github.com/suyuan32/simple-admin-job/ent/tasklog"
-	"github.com/suyuan32/simple-admin-job/internal/svc"
-	"github.com/suyuan32/simple-admin-job/internal/utils/dberrorhandler"
-	"github.com/suyuan32/simple-admin-job/internal/utils/entx"
-	"github.com/suyuan32/simple-admin-job/types/job"
+	"github.com/Tricitrus/tricitrus-admin-job/ent"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/task"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/tasklog"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/svc"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/utils/dberrorhandler"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/utils/entx"
+	"github.com/Tricitrus/tricitrus-admin-job/types/job"
 
-	"github.com/suyuan32/simple-admin-common/i18n"
+	"github.com/Tricitrus/tricitrus-admin-common/i18n"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -42,7 +42,6 @@ func (l *DeleteTaskLogic) DeleteTask(in *job.IDsReq) (*job.BaseResp, error) {
 		}
 		return nil
 	})
-
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}

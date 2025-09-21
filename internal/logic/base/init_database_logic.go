@@ -3,17 +3,17 @@ package base
 import (
 	"context"
 
-	"github.com/suyuan32/simple-admin-job/internal/utils/dberrorhandler"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/utils/dberrorhandler"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"github.com/suyuan32/simple-admin-common/enum/errorcode"
-	"github.com/suyuan32/simple-admin-common/i18n"
-	"github.com/suyuan32/simple-admin-common/msg/logmsg"
+	"github.com/Tricitrus/tricitrus-admin-common/enum/errorcode"
+	"github.com/Tricitrus/tricitrus-admin-common/i18n"
+	"github.com/Tricitrus/tricitrus-admin-common/msg/logmsg"
 	"github.com/zeromicro/go-zero/core/errorx"
 
-	"github.com/suyuan32/simple-admin-job/internal/mqs/amq/types/pattern"
-	"github.com/suyuan32/simple-admin-job/internal/svc"
-	"github.com/suyuan32/simple-admin-job/types/job"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/mqs/amq/types/pattern"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/svc"
+	"github.com/Tricitrus/tricitrus-admin-job/types/job"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,7 +33,6 @@ func NewInitDatabaseLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Init
 }
 
 func (l *InitDatabaseLogic) InitDatabase(in *job.Empty) (*job.BaseResp, error) {
-
 	if err := l.svcCtx.DB.Schema.Create(l.ctx, schema.WithForeignKeys(false)); err != nil {
 		logx.Errorw(logmsg.DatabaseError, logx.Field("detail", err.Error()))
 		return nil, errorx.NewCodeError(errorcode.Internal, err.Error())
@@ -66,7 +65,6 @@ func (l *InitDatabaseLogic) insertTaskData() error {
 		SetPattern(pattern.RecordHelloWorld).
 		SetPayload("{\"name\": \"Mike (DPTask 60s)\"}").
 		Exec(l.ctx)
-
 	if err != nil {
 		return err
 	}

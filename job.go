@@ -25,13 +25,13 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/suyuan32/simple-admin-job/internal/config"
-	"github.com/suyuan32/simple-admin-job/internal/mqs/amq/task/dynamicperiodictask"
-	"github.com/suyuan32/simple-admin-job/internal/mqs/amq/task/mqtask"
-	"github.com/suyuan32/simple-admin-job/internal/mqs/amq/task/scheduletask"
-	"github.com/suyuan32/simple-admin-job/internal/server"
-	"github.com/suyuan32/simple-admin-job/internal/svc"
-	"github.com/suyuan32/simple-admin-job/types/job"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/config"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/mqs/amq/task/dynamicperiodictask"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/mqs/amq/task/mqtask"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/mqs/amq/task/scheduletask"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/server"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/svc"
+	"github.com/Tricitrus/tricitrus-admin-job/types/job"
 )
 
 var configFile = flag.String("f", "etc/job.yaml", "the config file")
