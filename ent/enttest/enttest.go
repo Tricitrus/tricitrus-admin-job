@@ -5,12 +5,12 @@ package enttest
 import (
 	"context"
 
-	"github.com/suyuan32/simple-admin-job/ent"
+	"github.com/Tricitrus/tricitrus-admin-job/ent"
 	// required by schema hooks.
-	_ "github.com/suyuan32/simple-admin-job/ent/runtime"
+	_ "github.com/Tricitrus/tricitrus-admin-job/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"github.com/suyuan32/simple-admin-job/ent/migrate"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/migrate"
 )
 
 type (
@@ -71,6 +71,7 @@ func NewClient(t TestingT, opts ...Option) *ent.Client {
 	migrateSchema(t, c, o)
 	return c
 }
+
 func migrateSchema(t TestingT, c *ent.Client, o *options) {
 	tables, err := schema.CopyTables(migrate.Tables)
 	if err != nil {

@@ -3,14 +3,14 @@ package tasklog
 import (
 	"context"
 
-	"github.com/suyuan32/simple-admin-job/ent/predicate"
-	"github.com/suyuan32/simple-admin-job/ent/task"
-	"github.com/suyuan32/simple-admin-job/ent/tasklog"
-	"github.com/suyuan32/simple-admin-job/internal/svc"
-	"github.com/suyuan32/simple-admin-job/internal/utils/dberrorhandler"
-	"github.com/suyuan32/simple-admin-job/types/job"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/predicate"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/task"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/tasklog"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/svc"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/utils/dberrorhandler"
+	"github.com/Tricitrus/tricitrus-admin-job/types/job"
 
-	"github.com/suyuan32/simple-admin-common/utils/pointy"
+	"github.com/Tricitrus/tricitrus-admin-common/utils/pointy"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -40,7 +40,6 @@ func (l *GetTaskLogListLogic) GetTaskLogList(in *job.TaskLogListReq) (*job.TaskL
 	}
 
 	result, err := l.svcCtx.DB.TaskLog.Query().Where(predicates...).Page(l.ctx, in.Page, in.PageSize)
-
 	if err != nil {
 		return nil, dberrorhandler.DefaultEntError(l.Logger, err, in)
 	}

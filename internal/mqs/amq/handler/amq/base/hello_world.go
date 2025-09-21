@@ -7,19 +7,19 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/suyuan32/simple-admin-common/i18n"
+	"github.com/Tricitrus/tricitrus-admin-common/i18n"
 	"github.com/zeromicro/go-zero/core/errorx"
 	"github.com/zeromicro/go-zero/core/logx"
 
-	"github.com/suyuan32/simple-admin-job/ent/task"
-	"github.com/suyuan32/simple-admin-job/internal/enum/taskresult"
-	"github.com/suyuan32/simple-admin-job/internal/mqs/amq/types/pattern"
-	"github.com/suyuan32/simple-admin-job/internal/utils/dberrorhandler"
+	"github.com/Tricitrus/tricitrus-admin-job/ent/task"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/enum/taskresult"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/mqs/amq/types/pattern"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/utils/dberrorhandler"
 
 	"github.com/hibiken/asynq"
 
-	"github.com/suyuan32/simple-admin-job/internal/mqs/amq/types/payload"
-	"github.com/suyuan32/simple-admin-job/internal/svc"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/mqs/amq/types/payload"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/svc"
 )
 
 type HelloWorldHandler struct {
@@ -61,7 +61,6 @@ func (l *HelloWorldHandler) ProcessTask(ctx context.Context, t *asynq.Task) erro
 		SetResult(taskresult.Success).
 		SetTasksID(l.taskId).
 		Exec(context.Background())
-
 	if err != nil {
 		return dberrorhandler.DefaultEntError(logx.WithContext(context.Background()), err,
 			"failed to save task log to database")

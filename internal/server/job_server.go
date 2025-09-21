@@ -6,11 +6,11 @@ package server
 import (
 	"context"
 
-	"github.com/suyuan32/simple-admin-job/internal/logic/base"
-	"github.com/suyuan32/simple-admin-job/internal/logic/task"
-	"github.com/suyuan32/simple-admin-job/internal/logic/tasklog"
-	"github.com/suyuan32/simple-admin-job/internal/svc"
-	"github.com/suyuan32/simple-admin-job/types/job"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/logic/base"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/logic/task"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/logic/tasklog"
+	"github.com/Tricitrus/tricitrus-admin-job/internal/svc"
+	"github.com/Tricitrus/tricitrus-admin-job/types/job"
 )
 
 type JobServer struct {
