@@ -5,7 +5,7 @@ ARG PROJECT=job
 # Define the config file name | 定义配置文件名
 ARG CONFIG_FILE=job.yaml
 # Define the author | 定义作者
-ARG AUTHOR="yuansu.china.work@gmail.com"
+ARG AUTHOR="tricitrus.dev@gmail.com"
 
 LABEL org.opencontainers.image.authors=${AUTHOR}
 
